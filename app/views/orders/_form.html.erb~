@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name, size:40 %>
+    <%= f.text_field :name %>
   </div>
   <div class="field">
     <%= f.label :address %><br>
-    <%= f.text_area :address, rows:3, cols:40 %>
+    <%= f.text_area :address %>
   </div>
   <div class="field">
     <%= f.label :email %><br>
@@ -25,8 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :pay_type %><br>
-    <%= f.select :pay_type, Order::PAYMENT_TYPES, 
-                  prompt: "Select a payment method" %>
+    <%= f.text_field :pay_type %>
   </div>
   <div class="actions">
     <%= f.submit %>
