@@ -52,5 +52,5 @@ class LineItemsControllerTest < ActionController::TestCase
     xhr :post, :create, :product_id => products(:one).id
   end
   assert_response :success
-
+end
 end
