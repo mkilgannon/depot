@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
   <title>Pragprog Books Online Store</title>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' =>  true %>
@@ -16,6 +18,14 @@
 </div>
   <div id="columns">
   <div id="side">
+  <% if session[:user_id] %>
+  <br />
+  <%= link_to 'Orders',   orders_path   %><br />
+  <%= link_to 'Products', products_path %><br />
+  <%= link_to 'Users',    users_path    %><br />
+  <br />
+  <%= button_to 'Logout', logout_path, :method => :delete   %>
+<% end %>
     
   <% if @cart %>
   <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>

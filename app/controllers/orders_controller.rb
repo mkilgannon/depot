@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  skip_before_action :authorize, only: [:new, :create]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   include CurrentCart
   before_action :set_cart, only: [:new, :create]
@@ -15,12 +16,13 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
-    @order = Order.new
+   
     if @cart.line_items.empty?
-    redirect_to store_url, notice: "Your cart is empty"
-    return
-end
-  end
+      redirect_to store_url, notice: "Your cart is empty"
+      return
+    end
+    @order = Order.new
+    end
 
   # GET /orders/1/edit
   def edit
@@ -33,11 +35,12 @@ end
     @order.add_line_items_from_cart(@cart)
     respond_to do |format|
       if @order.save
+ 
         Cart.destroy(session[:cart_id])
-session[:cart_id] = nil
+        session[:cart_id] = nil
 
-format.html { 
-  redirect_to store_url, notice: 'Thank you for your order.'
+      format.html { 
+       redirect_to store_url, notice: 'Thank you for your order.'
 }
         format.json { render :show, status: :created, location: @order }
       else
